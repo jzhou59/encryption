@@ -27,4 +27,26 @@ public class EncryptionController {
         CommonResponse sha1Resp = encryptionService.sha1(plainStr);
         return sha1Resp;
     }
+
+    @GetMapping("/sha224")
+    public CommonResponse sha224(@RequestParam("plainStr") String plainStr){
+        CommonResponse sha224Resp = encryptionService.sha224(plainStr);
+        return sha224Resp;
+    }
+
+    @GetMapping("/sha256")
+    public CommonResponse sha256(@RequestParam("plainStr") String plainStr){
+        CommonResponse sha256Resp = encryptionService.sha256(plainStr);
+        return sha256Resp;
+    }
+    @GetMapping("/sha384")
+    public CommonResponse sha384(@RequestParam("plainStr") String plainStr){
+        CommonResponse sha384Resp = encryptionService.sha384(plainStr);
+        return sha384Resp;
+    }
+    @GetMapping("/sha512")
+    public CommonResponse sha512(@RequestParam("plainStr") String plainStr){
+        CommonResponse sha512Resp = encryptionService.sha512(plainStr);
+        return sha512Resp;
+    }
 }
