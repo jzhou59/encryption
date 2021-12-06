@@ -6,4 +6,5 @@ public interface EncryptionService {
 
     CommonResponse md5(String str);
     
+    CommonResponse sha1(String str);
 }

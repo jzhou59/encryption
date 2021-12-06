@@ -21,4 +21,10 @@ public class EncryptionController {
         CommonResponse md5Resp = encryptionService.md5(plainStr);
         return md5Resp;
     }
+
+    @GetMapping("/sha1")
+    public CommonResponse sha1(@RequestParam("plainStr") String plainStr){
+        CommonResponse sha1Resp = encryptionService.sha1(plainStr);
+        return sha1Resp;
+    }
 }
