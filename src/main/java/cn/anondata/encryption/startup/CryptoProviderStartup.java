@@ -17,5 +17,10 @@ public class CryptoProviderStartup {
     public void addProvider(){
         Security.addProvider(new BouncyCastleProvider());
         log.info("Bouncycastle provider has been added");
+        if(Security.getProvider("BC")!=null){
+            log.info("Bouncycastle checker passed");
+        }else{
+            log.info("Bouncycastle checker failed");
+        }
     }
 }
