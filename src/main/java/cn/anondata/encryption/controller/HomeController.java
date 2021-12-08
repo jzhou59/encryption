@@ -17,7 +17,7 @@ public class HomeController {
                 .append("\n")
                 .append("<p>Only study purpose is allowed.</p>")
                 .append("\n")
-                .append("<p>Feel free to friendly use and \"No data is collected by this website.\"</p>")
+                .append("<p>Feel safe to friendly use and <b>\"No data is collected by this website.\"</b></p>")
                 .append("\n")
                 .append("<p>More details could be found in repo JunjieChou/encryption(https://github.com/JunjieChou/encryption), and welcome for suggestions and prs.</p>");
         return sb.toString();

@@ -47,7 +47,7 @@ public class HMACServiceImpl implements HMACService {
                 break;
         }
         return hmacAlg == null ? CommonResp.builder().errCode("1")
-                .errMsg("Disired hash algorithm is not supported, please check the hash name or create a issue?")
+                .errMsg("Disired mac algorithm is not supported, please check the mac name or create a issue at junjieChou/encryption.")
                 .result(str).build()
                 : CommonResp.builder().errCode("0").errMsg("success").result(hmacAlg.digest(str, key)).build();
     }
