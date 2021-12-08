@@ -3,7 +3,9 @@ package cn.anondata.encryption.crypto.hash;
 import org.bouncycastle.crypto.digests.MD5Digest;
 import org.bouncycastle.util.encoders.Hex;
 
-public class MD5 {
+public class MD5 implements HashAlg {
+
+    @Override
     public String digest(String str) {
         MD5Digest md5Digest = new MD5Digest();
         md5Digest.update(str.getBytes(), 0, str.getBytes().length);
