@@ -1,4 +1,4 @@
-package cn.anondata.encryption.crypto.hash;
+package cn.anondata.encryption.crypto.hmac;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,23 +9,24 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class HMACMD5Test {
+public class HMACSHA1Test {
 
-    
     @BeforeAll
-    static void addProvider(){
+    static void addProvider() {
         Security.addProvider(new BouncyCastleProvider());
     }
 
     @Test
     void testDigest() {
-        HMACMD5 hmacmd5 = new HMACMD5();
-        String digest = hmacmd5.digest("1234", "1234");
-        assertEquals(digest, "7b43300d83a6fc4b79b750acb2332fe0");
+        HMACSHA1 hmacsha1 = new HMACSHA1();
+        String digest = hmacsha1.digest("1234", "1234");
+        assertEquals(digest, "dd7282f9e186a0a213f7d506fcbf65038ded2b24");
+        digest = hmacsha1.digest("", "");
+        assertEquals(digest, "fbdb1d1b18aa6c08324b7d64b71fb76370690e1d");
     }
 
     @AfterAll
-    static void removeProvider(){
+    static void removeProvider() {
         Security.removeProvider("BC");
     }
 }

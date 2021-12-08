@@ -1,4 +1,4 @@
-package cn.anondata.encryption.crypto.hash;
+package cn.anondata.encryption.crypto.hmac;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class SHA1Test {
+public class HMACSHA384Test {
 
     @BeforeAll
     static void addProvider() {
@@ -18,9 +18,13 @@ public class SHA1Test {
 
     @Test
     void testDigest() {
-        SHA1 sha1 = new SHA1();
-        assertEquals(sha1.digest("123"), "40bd001563085fc35165329ea1ff5c5ecbdbbeef");
-        assertEquals(sha1.digest("password"), "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8");
+        HMACSHA384 hmacsha384 = new HMACSHA384();
+        String digest = hmacsha384.digest("123", "123");
+        assertEquals(digest,
+                "6f68b5279ee4569a70f9d0b4ef51a4db97d77cb90199c20b637f2090e39780f8eec84f302be2ee3fec36a734d9e6da5b");
+        digest = hmacsha384.digest("", "");
+        assertEquals(digest,
+                "6c1f2ee938fad2e24bd91298474382ca218c75db3d83e114b3d4367776d14d3551289e75e8209cd4b792302840234adc");
     }
 
     @AfterAll

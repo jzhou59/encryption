@@ -12,10 +12,10 @@ import org.junit.jupiter.api.Test;
 public class SHA256Test {
 
     @BeforeAll
-    static void addProvider(){
+    static void addProvider() {
         Security.addProvider(new BouncyCastleProvider());
     }
-    
+
     @Test
     void testDigest() {
         SHA256 sha256 = new SHA256();
@@ -25,7 +25,7 @@ public class SHA256Test {
     }
 
     @AfterAll
-    static void removeProvider(){
+    static void removeProvider() {
         Security.removeProvider("BC");
     }
 }

@@ -1,4 +1,4 @@
-package cn.anondata.encryption.crypto.hash;
+package cn.anondata.encryption.crypto.hmac;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class SHA224Test {
+public class HMACSHA224Test {
 
     @BeforeAll
     static void addProvider() {
@@ -18,10 +18,11 @@ public class SHA224Test {
 
     @Test
     void testDigest() {
-        SHA224 sha224 = new SHA224();
-        assertEquals(sha224.digest(""), "d14a028c2a3a2bc9476102bb288234c415a2b01f828ea62ac5b3e42f");
-        assertEquals(sha224.digest("123"), "78d8045d684abd2eece923758f3cd781489df3a48e1278982466017f");
-        assertEquals(sha224.digest("password"), "d63dc919e201d7bc4c825630d2cf25fdc93d4b2f0d46706d29038d01");
+        HMACSHA224 hmacsha224 = new HMACSHA224();
+        String digest = hmacsha224.digest("", "");
+        assertEquals(digest, "5ce14f72894662213e2748d2a6ba234b74263910cedde2f5a9271524");
+        digest = hmacsha224.digest("123", "123");
+        assertEquals(digest, "f92d8e071adeae514c1ac0f94502e75bb5c28b817e0e0a01e762348f");
     }
 
     @AfterAll
