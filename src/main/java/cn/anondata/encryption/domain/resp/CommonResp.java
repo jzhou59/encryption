@@ -1,4 +1,4 @@
-package cn.anondata.encryption.response;
+package cn.anondata.encryption.domain.resp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,8 +11,11 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
-public class CommonResponse {
+public class CommonResp {
+
     String errCode;
+
     String errMsg;
+
     String result;
 }
