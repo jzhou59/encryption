@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.anondata.encryption.domain.req.HMACReq;
 import cn.anondata.encryption.domain.req.HashReq;
+import cn.anondata.encryption.domain.req.SymmetryReq;
 import cn.anondata.encryption.domain.resp.CommonResp;
 import cn.anondata.encryption.service.HMACService;
 import cn.anondata.encryption.service.HashService;
+import cn.anondata.encryption.service.SymmetryService;
 
 @RestController
 @RequestMapping(value = "/encryption")
@@ -24,13 +26,16 @@ public class EncryptionController {
     @Autowired
     HMACService hmacService;
 
+    @Autowired
+    SymmetryService symmetryService;
+
     @PostMapping("/hash")
     public CommonResp hash(@RequestBody HashReq hashReq) {
         return hashService.hash(hashReq.getHashAlg(), hashReq.getMessage());
     }
 
     @GetMapping("/hash")
-    public CommonResp hash(@RequestParam("hashAlg") String hashAlg, @RequestParam("message") String message){
+    public CommonResp hash(@RequestParam("hashAlg") String hashAlg, @RequestParam("message") String message) {
         return hashService.hash(hashAlg, message);
     }
 
@@ -40,7 +45,18 @@ public class EncryptionController {
     }
 
     @GetMapping("/hmac")
-    public CommonResp hmac(@RequestParam("hmacAlg") String hmacAlg, @RequestParam("message") String message, @RequestParam("key") String key){
+    public CommonResp hmac(@RequestParam("hmacAlg") String hmacAlg, @RequestParam("message") String message,
+            @RequestParam("key") String key) {
         return hmacService.hmac(hmacAlg, message, key);
+    }
+
+    @PostMapping("/symmetry/encrypt")
+    public CommonResp symmetryEncrypt(@RequestBody SymmetryReq symmetryReq) {
+        return symmetryService.symmetryEncrypt(symmetryReq);
+    }
+
+    @PostMapping("/symmetry/decrypt")
+    public CommonResp symmetryDecrypt(@RequestBody SymmetryReq symmetryReq) {
+        return symmetryService.symmetryDecrypt(symmetryReq);
     }
 }

@@ -10,6 +10,8 @@ import cn.anondata.encryption.crypto.hash.SHA256;
 import cn.anondata.encryption.crypto.hash.SHA384;
 import cn.anondata.encryption.crypto.hash.SHA512;
 import cn.anondata.encryption.domain.resp.CommonResp;
+import cn.anondata.encryption.exception.EncryptionException;
+import cn.anondata.encryption.exception.EncryptionExceptionEnum;
 import cn.anondata.encryption.service.HashService;
 
 @Service
@@ -47,11 +49,10 @@ public class HashServiceImpl implements HashService {
             default:
                 break;
         }
-
-        return hashAlg == null ? CommonResp.builder().errCode("1")
-                .errMsg("Disired hash algorithm is not supported, please check the hash name or create a issue?")
-                .result(str).build()
-                : CommonResp.builder().errCode("0").errMsg("success").result(hashAlg.digest(str)).build();
+        if(hashAlg == null){
+            throw new EncryptionException(EncryptionExceptionEnum.HASH_NO_PROVIDED);
+        }
+        return CommonResp.builder().errCode("0").errMsg("SUCCESS").result(hashAlg.digest(str)).build();
     }
 
 }

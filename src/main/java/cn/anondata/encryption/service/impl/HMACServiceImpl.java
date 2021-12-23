@@ -10,6 +10,8 @@ import cn.anondata.encryption.crypto.hmac.HMACSHA256;
 import cn.anondata.encryption.crypto.hmac.HMACSHA384;
 import cn.anondata.encryption.crypto.hmac.HMACSHA512;
 import cn.anondata.encryption.domain.resp.CommonResp;
+import cn.anondata.encryption.exception.EncryptionException;
+import cn.anondata.encryption.exception.EncryptionExceptionEnum;
 import cn.anondata.encryption.service.HMACService;
 
 @Service
@@ -46,10 +48,10 @@ public class HMACServiceImpl implements HMACService {
             default:
                 break;
         }
-        return hmacAlg == null ? CommonResp.builder().errCode("1")
-                .errMsg("Disired mac algorithm is not supported, please check the mac name or create a issue at junjieChou/encryption.")
-                .result(str).build()
-                : CommonResp.builder().errCode("0").errMsg("success").result(hmacAlg.digest(str, key)).build();
+        if(hmacAlg == null){
+            throw new EncryptionException(EncryptionExceptionEnum.HMAC_NO_PROVIDED);
+        }
+        return CommonResp.builder().errCode("0").errMsg("SUCCESS").result(hmacAlg.digest(str, key)).build();
     }
 
 }
