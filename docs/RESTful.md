@@ -1,27 +1,7 @@
-# 在线加密web项目
 
-## 零、启动方式
-prerequisite: java-17, maven
-
-```git clone [this repo]```
-
-```cd encryption```
-
-```.mvnw spring-boot:run```
-
-## 一、简介
-这是一个用于提供加密服务的独立web项目，目标是提供hash、对称加密、非对称加密、密钥交换等实现。
-已开发完成或者正在开发的算法包括
-- hash：SHA1、SHA224、SHA256、SHA384、SHA512、MD5
-- mac：HmacSHA1、HmacSHA224、HmacSHA256、HmacSHA384、HmacSHA512、HmacMD5
-- symmetric：AES、DES、TripleDES、Rabbit、RC4
-- asymmetric：RSA
-- code：UrlEncode、UrlDecode、base64
-
-
-## 二、REST接口定义
-### 2.0 公共参数
-#### 2.0.0 公共返回体
+# REST接口定义
+## 0 公共参数
+### 0.0 公共返回体
 ```JSON
 {
     "errCode":"1234",
@@ -29,7 +9,7 @@ prerequisite: java-17, maven
     "result": {}
 }
 ```
-#### 2.0.1 异常状态码
+### 0.1 异常状态码
 异常状态码共7位，分为三个部分，前2位表示类别（hash/hmac/symmtry/...），中间三位表示http(s)状态码，后2位表示类别内的异常码编号。
 0表示一切正常。
 
@@ -45,14 +25,14 @@ prerequisite: java-17, maven
 
 
 
-### 2.1 hash相关接口
-#### 2.1.0 hash介绍
+## 1 hash相关接口
+### 1.0 hash介绍
 目前提供MD5、SHA1、SHA224、SHA256、SHA384、SHA512六种hash算法，```docs```目录下的相关介绍文档正在完善中。。。
 
 项目中，六种hash算法和名称对应如下为 ```MD5 - "md5"```、```SHA1 - "sha1"```、```SHA224 - "sha224"```、```SHA256 - "sha256"```、```SHA384 - "sha384"```、```SHA512 - "sha512"```，大小写不敏感，可以随意替换大小写。
 包含get和post请求，
 
-#### 2.1.1 获取某个字符串的hash值
+### 1.1 获取某个字符串的hash值
 - URL
     - GET ```/encryption/hash?hashAlg={String:hashAlg}&message={String:message}```
     - POST ```/encryption/hash```
@@ -71,14 +51,14 @@ prerequisite: java-17, maven
     - 0140401
     
 
-### 2.2 hmac相关接口
-#### 2.2.0 hmac介绍
+## 2 hmac相关接口
+### 2.0 hmac介绍
 目前提供HmacSHA1、HmacSHA224、HmacSHA256、HmacSHA384、HmacSHA512、HmacMD5六种hmac算法，```docs```目录下的相关介绍文档正在完善中。。。
 
 项目中，六种hmac算法和名称对应如下为 ```HmacMD5 - "Hmacmd5"```、```HmacSHA1 - "Hmacsha1"```、```HmacSHA224 - "Hmacsha224"```、```HmacSHA256 - "Hmacsha256"```、```HmacSHA384 - "Hmacsha384"```、```HmacSHA512 - "Hmacsha512"```，大小写不敏感，可以随意替换大小写。
 包含get和post请求，
 
-#### 2.2.1 获取某个字符串的hmac值
+### 2.1 获取某个字符串的hmac值
 - URL
     - GET ```/encryption/hmac?hashAlg={String:hashAlg}&message={String:message}&key={String:key}```
     - POST ```/encryption/hmac```
@@ -97,21 +77,21 @@ prerequisite: java-17, maven
 - 可能存在的错误码
     - 0240401 
 
-### 2.2 symmetric相关接口
-#### 2.2.0 symmetric介绍
+## 3 symmetric相关接口
+### 3.0 symmetric介绍
 从对称加密模式、填充模式、角度进行介绍
 目前提供aes一种对称加密算法，```docs```目录下的相关介绍文档正在完善中。。。
 
 项目中，symmetric encryption算法和名称对应如下为```"aes"-"aes"```，大小写不敏感，可以随意替换大小写。
 
-##### 2.2.0.0 对称加密的模式
+#### 3.0.0 对称加密的模式
 目前支持以下四种，大小写不敏感
 - ECB
 - CBC
 - CFB
 - OFB
 
-##### 2.2.0.1 Padding的方式
+#### 3.0.1 Padding的方式
 对称加密中为了对齐块加密的块所提出的填充方式，支持以下八种，**大小写敏感**。
 - NoPadding：当明文正好是块的倍数，可以不填充
 - PKCS5Padding：将明文长度填充到块的倍数，每个byte填充的数字为填充的块数，只支持块的大小为8bytes
@@ -122,7 +102,7 @@ prerequisite: java-17, maven
 - TBCPadding：根据明文最后一个bit决定如何填充，如果最后一个bit为0，则全部填充1；如果最后一个bit为1，则全部填充0
 - ZeroBytePadding：仅仅填充0，不推荐使用
 
-#### 2.2.1 获取经过AES加密/解密的结果
+### 3.1 获取经过AES加密/解密的结果
 - URL
     - POST ```加密：/encryption/symmetry/encrypt```、```解密：/encryption/symmetry/decrypt```
 - 请求参数
