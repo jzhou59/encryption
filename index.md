@@ -1,0 +1,1 @@
+A standalone encryption-assistant server that could be deployed inside a team, in the case that such third-party websites are not trustworthy in terms of information privacy.
